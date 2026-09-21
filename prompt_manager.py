@@ -156,7 +156,6 @@ def show_menu():
     print("7. 즐겨찾기 목록")
     print("0. 종료")
 
-
 def main():
     prompts = get_default_prompts()
     while True:
