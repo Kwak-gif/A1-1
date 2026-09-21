@@ -74,9 +74,8 @@ python prompt_manager.py
 A1-1/
 ├── prompt_manager.py     # 메인 파이썬 프로그램
 ├── README.md             # 프로젝트 소개 및 매뉴얼
-├── README_rev_1.md       # 프로젝트 설명서 개정본 (rev_1)
 ├── .gitignore            # Git 추적 제외 설정 파일
-└── screenshots/          # (선택) 과제 실행 및 Git 로그 스크린샷 모음
+└── 스크린샷/             # 과제 실행 및 Git 로그 스크린샷 모음
     ├── 개발환경 설정 스샷.png
     ├── 프로그램 실행 스샷.png
     └── git log --graph 스샷.png
