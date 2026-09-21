@@ -67,6 +67,20 @@ def add_prompt(prompts):
     })
     print("✅ 프롬프트가 추가되었습니다!")
 
+def show_by_category(prompts):
+    """선택한 카테고리에 속한 프롬프트만 필터링하여 출력."""
+    print("\n=== 카테고리별 조회 ===")
+    category = choose_category()
+    matched = [p for p in prompts if p["category"] == category]
+    if not matched:
+        print(f"[{category}] 카테고리에 프롬프트가 없습니다.")
+        return
+    print(f"\n[{category}] 카테고리 프롬프트:")
+    for i, p in enumerate(matched, start=1):
+        star = " ⭐" if p["favorite"] else ""
+        print(f"{i}. {p['title']}{star}")
+    print(f"\n총 {len(matched)}개의 프롬프트")
+
 def show_menu():
     print("\n=== 나만의 프롬프트 관리 ===")
     print("1. 프롬프트 추가")
@@ -89,7 +103,7 @@ def main():
         elif choice == "2":
             show_list(prompts)
         elif choice == "3":
-            print("[준비 중] 카테고리별 조회")
+            show_by_category(prompts)
         elif choice == "4":
             print("[준비 중] 프롬프트 검색")
         elif choice == "5":
