@@ -31,6 +31,41 @@ def show_list(prompts):
         print(format_line(i, p))
     print(f"\n총 {len(prompts)}개의 프롬프트")
 
+def ask_nonempty(label):
+    """빈 값이면 다시 물어보는 입력 도우미."""
+    while True:
+        value = input(label).strip()
+        if value:
+            return value
+        print("⚠️ 값을 비워둘 수 없습니다. 다시 입력해 주세요.")
+
+def choose_category():
+    """카테고리 번호를 선택하거나 직접 입력받는 도우미."""
+    print("\n카테고리 선택:")
+    for i, c in enumerate(CATEGORIES, start=1):
+        print(f"{i}) {c}")
+    while True:
+        sel = input("선택(번호, 없으면 직접 입력): ").strip()
+        if sel.isdigit() and 1 <= int(sel) <= len(CATEGORIES):
+            return CATEGORIES[int(sel) - 1]
+        if sel:  # 목록에 없는 새로운 카테고리는 직접 입력값 사용
+            return sel
+        print("⚠️ 카테고리를 입력해 주세요.")
+
+def add_prompt(prompts):
+    """새로운 프롬프트를 입력받아 리스트에 추가."""
+    print("\n=== 프롬프트 추가 ===")
+    title = ask_nonempty("제목: ")
+    content = ask_nonempty("내용: ")
+    category = choose_category()
+    prompts.append({
+        "title": title,
+        "content": content,
+        "category": category,
+        "favorite": False
+    })
+    print("✅ 프롬프트가 추가되었습니다!")
+
 def show_menu():
     print("\n=== 나만의 프롬프트 관리 ===")
     print("1. 프롬프트 추가")
@@ -49,7 +84,7 @@ def main():
         show_menu()
         choice = input("선택: ").strip()
         if choice == "1":
-            print("[준비 중] 프롬프트 추가")
+            add_prompt(prompts)
         elif choice == "2":
             show_list(prompts)
         elif choice == "3":
