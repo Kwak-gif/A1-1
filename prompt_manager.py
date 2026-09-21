@@ -24,6 +24,7 @@ def format_line(index, p):
 def show_list(prompts):
     """등록된 모든 프롬프트 목록을 출력."""
     print("\n=== 프롬프트 목록 ===")
+    print("=" * 30)
     if not prompts:
         print("등록된 프롬프트가 없습니다.")
         return
