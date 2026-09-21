@@ -134,6 +134,17 @@ def toggle_favorite(prompts):
     state = "추가했습니다" if p["favorite"] else "해제했습니다"
     print(f"'{p['title']}' 프롬프트를 즐겨찾기에 {state}!")
 
+def show_favorites(prompts):
+    """즐겨찾기(favorite == True)된 프롬프트만 모아서 출력."""
+    print("\n=== 즐겨찾기 목록 ===")
+    favs = [p for p in prompts if p["favorite"]]
+    if not favs:
+        print("즐겨찾기된 프롬프트가 없습니다.")
+        return
+    for i, p in enumerate(favs, start=1):
+        print(format_line(i, p))
+    print(f"\n총 {len(favs)}개의 즐겨찾기")
+
 def show_menu():
     print("\n=== 나만의 프롬프트 관리 ===")
     print("1. 프롬프트 추가")
@@ -164,7 +175,7 @@ def main():
         elif choice == "6":
             toggle_favorite(prompts)
         elif choice == "7":
-            print("[준비 중] 즐겨찾기 목록")
+            show_favorites(prompts)
         elif choice == "0":
             print("프로그램을 종료합니다. 안녕히 가세요!")
             break
