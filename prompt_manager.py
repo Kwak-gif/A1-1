@@ -17,6 +17,19 @@ def get_default_prompts():
          "category": "페르소나", "favorite": False},
     ]
 
+def format_line(index, p):
+    star = " ⭐" if p["favorite"] else ""
+    return f"{index}. [{p['category']}] {p['title']}{star}"
+
+def show_list(prompts):
+    """등록된 모든 프롬프트 목록을 출력."""
+    print("\n=== 프롬프트 목록 ===")
+    if not prompts:
+        print("등록된 프롬프트가 없습니다.")
+        return
+    for i, p in enumerate(prompts, start=1):
+        print(format_line(i, p))
+    print(f"\n총 {len(prompts)}개의 프롬프트")
 
 def show_menu():
     print("\n=== 나만의 프롬프트 관리 ===")
@@ -38,7 +51,7 @@ def main():
         if choice == "1":
             print("[준비 중] 프롬프트 추가")
         elif choice == "2":
-            print("[준비 중] 프롬프트 목록")
+            show_list(prompts)
         elif choice == "3":
             print("[준비 중] 카테고리별 조회")
         elif choice == "4":
