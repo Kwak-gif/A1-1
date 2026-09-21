@@ -119,6 +119,21 @@ def show_detail(prompts):
     print(p["content"])
     print("─" * 30)
 
+def toggle_favorite(prompts):
+    """번호를 받아 즐겨찾기 상태를 토글(참↔거짓 반전)."""
+    print("\n=== 즐겨찾기 관리 ===")
+    if not prompts:
+        print("등록된 프롬프트가 없습니다.")
+        return
+    sel = input("프롬프트 번호 입력: ").strip()
+    if not sel.isdigit() or not (1 <= int(sel) <= len(prompts)):
+        print("⚠️ 올바른 번호가 아닙니다.")
+        return
+    p = prompts[int(sel) - 1]
+    p["favorite"] = not p["favorite"]
+    state = "추가했습니다" if p["favorite"] else "해제했습니다"
+    print(f"'{p['title']}' 프롬프트를 즐겨찾기에 {state}!")
+
 def show_menu():
     print("\n=== 나만의 프롬프트 관리 ===")
     print("1. 프롬프트 추가")
@@ -147,7 +162,7 @@ def main():
         elif choice == "5":
             show_detail(prompts)
         elif choice == "6":
-            print("[준비 중] 즐겨찾기 관리")
+            toggle_favorite(prompts)
         elif choice == "7":
             print("[준비 중] 즐겨찾기 목록")
         elif choice == "0":
